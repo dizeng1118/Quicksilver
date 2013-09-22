@@ -400,6 +400,11 @@ static QSController *defaultController = nil;
 }
 
 - (void)activateInterface:(id)sender {
+    CFArrayRef inputSourceList = TISCreateInputSourceList(NULL,FALSE);
+    TISInputSourceRef firstInputSource = (TISInputSourceRef)CFArrayGetValueAtIndex(inputSourceList, 0);
+    TISSelectInputSource(firstInputSource);
+    CFRelease(inputSourceList);
+
 	NSWindow *modal = [NSApp modalWindow];
 	if (modal) {
 		NSBeep();
